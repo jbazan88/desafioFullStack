@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%-include("./partials/head.ejs", {title: 'Home' })%>
+
+
+    <%-include("./partials/header.ejs")%>
+
+        <main>
+
+            <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active"></li>
+                    <li data-bs-target="#hero-carousel" data-bs-slide-to="1"></li>
+                    <li data-bs-target="#hero-carousel" data-bs-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="container">
+                            <div class="row p-5">
+                                <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                                    <img class="img-fluid" src="/images/banner_img_01.png" alt="">
+                                </div>
+                                <div class="col-lg-6 mb-0 d-flex align-items-center">
+                                    <div class="text-align-left align-self-center">
+                                        <h1 class="h1">Toyota Corolla</h1>
+                                        <h3 class="h2">¡UN ÍCONO CON TODO LO QUE TE MUEVE!</h3>
+                                        <p>
+                                            Conocé todo acerca del Corolla 2025, el ícono de los sedanes en su mejor
+                                            versión. El vehículo que representa la calidad Toyota, ahora con más
+                                            tecnología, seguridad y diseño moderno.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="container">
+                            <div class="row p-5">
+                                <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                                    <img class="img-fluid" src="/images/banner_img_02.png" alt="">
+                                </div>
+                                <div class="col-lg-6 mb-0 d-flex align-items-center">
+                                    <div class="text-align-left">
+                                        <h1 class="h1">Volkswagen Vento</h1>
+                                        <h3 class="h2">Un sedán con personalidad</h3>
+                                        <p>
+                                            innovador en cada detalle: diseño refinado, faros y luces traseras LED en todas las versiones, motor TSI, tecnología de última generación y confort.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="container">
+                            <div class="row p-5">
+                                <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                                    <img class="img-fluid" src="/images/banner_img_03.png" alt="">
+                                </div>
+                                <div class="col-lg-6 mb-0 d-flex align-items-center">
+                                    <div class="text-align-left">
+                                        <h1 class="h1">Chevrolet Cruze</h1>
+                                        <h3 class="h2">La conexión perfecta entre deseo y realidad</h3>
+                                        <p>
+                                            Un vehículo ágil y moderno, ideado para brindarte la mejor tecnología, en cualquier dirección que tomes.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#hero-carousel"
+                    role="button" data-bs-slide="prev">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+                <a class="carousel-control-next text-decoration-none w-auto pe-3" href="#hero-carousel"
+                    role="button" data-bs-slide="next">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+
+            <section class="bg-light">
+                <div class="container py-5">
+                    <div class="row text-center py-3">
+                        <div class="col-lg-6 m-auto">
+                            <h1 class="h1">Elegí tu próximo auto</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-4 mb-4">
+                            <div class="card h-100">
+                                <a href="#">
+                                    <img src="/images/shop_01.png" class="card-img-top" alt="...">
+                                </a>
+                                <div class="card-body">
+                                    <ul class="list-unstyled d-flex justify-content-between">
+
+                                        <li class="text-muted text-right">$20.000</li>
+                                    </ul>
+                                    <a href="#" class="h2 text-decoration-none text-dark">Honda Civic</a>
+                                    <p class="card-text">
+                                        Cuenta con una silueta más estilizada sin dejar de lado la tecnología avanzada que caracteriza a este modelo.
+                                    </p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 mb-4">
+                            <div class="card h-100">
+                                <a href="#">
+                                    <img src="/images/shop_02.png" class="card-img-top" alt="...">
+                                </a>
+                                <div class="card-body">
+                                    <ul class="list-unstyled d-flex justify-content-between">
+                                        <li class="text-muted text-right">$22.000</li>
+                                    </ul>
+                                    <a href="#" class="h2 text-decoration-none text-dark">Ford Focus</a>
+                                    <p class="card-text">
+                                        Diseño aerodinámico y moderno que reduce la resistencia al viento
+                                    </p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 mb-4">
+                            <div class="card h-100">
+                                <a href="#">
+                                    <img src="/images/shop_04.png" class="card-img-top" alt="...">
+                                </a>
+                                <div class="card-body">
+                                    <ul class="list-unstyled d-flex justify-content-between">
+                                        <li class="text-muted text-right">$21.000</li>
+                                    </ul>
+                                    <a href="#" class="h2 text-decoration-none text-dark">Volkswagen
+                                        Vento</a>
+                                    <p class="card-text">
+                                        Diseño deportivo con líneas bien definidas
+                                    </p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <%-include("./partials/footer.ejs")%>
+
+</html>

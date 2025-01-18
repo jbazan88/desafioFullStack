@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head', {title: 'Agregar Producto' }) %>
+
+    <body>
+        <%- include('../partials/header') %>
+
+            <main>
+                <section class="bg-white py-5">
+                    <h1 class="text-center ">Agregar Producto</h1>
+                    <div class="container text-center py-3">
+                        
+                        <form method="POST" action="/admin/create">
+                            <label for="año">año:</label><br>
+                            <input type="text" id="año" name="año" value="" required><br><br>
+                            <label for="marca">marca:</label><br>
+                            <input type="text" id="marca" name="marca" value="" required><br><br>
+                            <label for="modelo">modelo:</label><br>
+                            <input type="text" id="modelo" name="modelo" value="" required><br><br>
+
+                            <label for="kilometraje">kilometraje:</label><br>
+                            <textarea id="kilometraje" name="kilometraje" required></textarea><br><br>
+                            <label for="transmision">transmision:</label><br>
+                            <textarea id="transmision" name="transmision" required></textarea><br><br>
+                            <label for="precio">precio:</label><br>
+                            <textarea id="precio" name="precio" required></textarea><br><br>
+
+                            <button type="submit">Guardar</button>
+                        </form>
+                    </div>
+                    <div class="container d-flex justify-content-end">
+                        <a href="/admin">Volver a la lista</a>
+                    </div>
+                </section>
+            </main>
+            <%- include('../partials/footer') %>
+    </body>
+
+</html>

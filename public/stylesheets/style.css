@@ -1,0 +1,119 @@
+body, ul, li, p, a, label, input, div {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px !important;
+  font-weight: 300 !important;
+}
+.h1 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 48px !important;
+  font-weight: 200 !important;
+}
+.h2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 30px !important;
+  font-weight: 300;
+}
+.h3 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 22px !important;
+}
+.logo { font-weight: 500 !important;}
+.text-warning {  color: #ede861 !important;}
+.text-muted { color: #bcbcbc !important;}
+.text-success { color: #5fc8e6 !important;}
+.text-light { color: #cfd6e1 !important;}
+.bg-dark { background-color: #212934 !important;}
+.bg-light { background-color: #e9eef5 !important;}
+.bg-black { background-color: #1d242d !important;}
+.bg-success { background-color: #5fc8e6 !important;}
+.btn-success {
+  background-color: #5fc8e6 !important;
+  border-color: #5fc8e6 !important;
+  color: #fff;
+}
+.pagination .page-link:hover {color: #000;}
+.pagination .page-link:hover, .pagination .page-link.active {
+  background-color: #5fc8e6;
+  color: #fff;
+}
+/* Nav */
+#nav_top { min-height: 40px;}
+#nav_top * { font-size: .9em !important;}
+#main_nav a { color: #212934;}
+#main_nav a:hover { color: #5fc8e6;}
+#main_nav .navbar .nav-icon { margin-right: 20px;}
+
+#hero-carousel { background: #efefef !important;}
+
+#carousel-related-product .slick-slide:focus { outline: none !important;}
+#carousel-related-product .slick-dots li button:before {
+  font-size: 15px;
+  margin-top: 20px;
+}
+
+.brand-img {
+  filter: grayscale(100%);
+  opacity: 0.5;
+  transition: .5s;
+}
+.brand-img:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+#hero-carousel .carousel-indicators li {
+  margin-top: -50px;
+  background-color: #5fc8e6;
+}
+#hero-carousel .carousel-control-next i,
+#hero-carousel .carousel-control-prev i {
+  color: #5fc8e6 !important;
+  font-size: 2.8em !important;
+}
+
+/* Footer */
+#dark_footer a { color: #000000;}
+#dark_footer a:hover { color: #68bb7d;}
+#dark_footer ul.footer-link-list li { padding-top: 10px;}
+#dark_footer ul.footer-icons li {
+  width: 2.6em;
+  height: 2.6em;
+  line-height: 2.6em;
+}
+#dark_footer ul.footer-icons li:hover {
+  background-color: #cfd6e1;
+  transition: .5s;
+}
+#dark_footer ul.footer-icons li:hover i {
+  color: #212934;
+  transition: .5s;
+}
+#dark_footer .border-light { border-color: #2d343f !important;}
+
+.product-wap .h3, .product-wap li, .product-wap i, .product-wap p {
+  font-size: 12px !important;
+}
+.product-wap .product-color-dot {
+  width: 6px;
+  height: 6px;
+}
+
+@media (min-width: 576px) {
+  .tempaltemo-carousel .h1 { font-size: 1em !important;}
+}
+
+@media (min-width: 768px) {
+  #main_nav .navbar-nav {max-width: 450px;}
+ }
+
+@media (min-width: 992px) {
+  #main_nav .navbar-nav {max-width: 550px;}
+  #hero-carousel .carousel-item {min-height: 30rem !important;}
+  .product-wap .h3, .product-wap li, .product-wap i, .product-wap p {font-size: 18px !important;}
+  .product-wap .product-color-dot {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media (min-width: 1200px) {}

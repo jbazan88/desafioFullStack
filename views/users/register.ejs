@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <%-include("../partials/head.ejs")%>
+  
+  <body>
+    <%-include("../partials/header.ejs")%>
+<main>
+  <section class="container bg-light py-5">
+    <ul class="nav nav-pills nav-justified mb-3" id="ex1">
+        <li class="nav-item">
+            <a class="nav-link " id="tab-login" href="./login">Login</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="tab-register" href="./register">Registro</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+         <div class="tab-pane fade show active" id="pills-register">
+            <form>
+
+                <div class="form-outline mb-4">
+                    <input type="text" id="registerName" class="form-control" required/>
+                    <label class="form-label" for="registerName">Nombre y Apellido</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <input type="email" id="registerEmail" class="form-control" required/>
+                    <label class="form-label" for="registerEmail">Email</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <input type="password" id="registerPassword" class="form-control" required/>
+                    <label class="form-label" for="registerPassword">Contraseña</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <input type="password" id="registerRepeatPassword" class="form-control" required/>
+                    <label class="form-label" for="registerRepeatPassword">repetir contraseña</label>
+                </div>
+
+                <div class="form-check d-flex justify-content-center mb-4">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked/>
+                    <label class="form-check-label" for="registerCheck">
+                        Acepto los terminos y condiciones
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block mb-3">Registrarse</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+</main>
+    <%-include("../partials/footer.ejs")%>
+  </body>
+</html>
