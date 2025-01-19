@@ -63,13 +63,23 @@ const productControllers = {
     },
     edit: (req, res) => {
         const products = getProducts();
-        const product = products.find(p => p.id === parseInt(req.params.id));
-        if (!product) {
+        const productIndex = products.findIndex(p => p.id === parseInt(req.params.id));
+        if (productIndex === -1) {
             return res.status(404).send('Producto no encontrado');
         }
-        res.render('products/productEdit', { product });
-    },
 
+        // Actualiza los campos del producto
+        products[productIndex].año = req.body.año;
+        products[productIndex].marca = req.body.name;
+        products[productIndex].modelo = req.body.description;
+        products[productIndex].kilometraje = req.body.kilometraje;
+        products[productIndex].transmision = req.body.transmision;
+        products[productIndex].precio = req.body.precio;
+
+        saveProducts(products);
+        res.redirect('/admin');
+    },
+    
     update: (req, res) => {
         const products = getProducts();
         const productIndex = products.findIndex(p => p.id === parseInt(req.params.id));
