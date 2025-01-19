@@ -1,7 +1,7 @@
 class Product {
     constructor(id, imagen, año, marca, modelo, kilometraje, transmision, precio) {
         this.id = id;
-        this.imagen = imagen || '/images/default.png';
+        this.imagen = imagen || '/images/default.jpg';
         this.año = año;
         this.marca = marca;
         this.modelo = modelo;
