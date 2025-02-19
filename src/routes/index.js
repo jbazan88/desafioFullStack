@@ -1,17 +1,13 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const { index, aboutUs, admin, adminProducts, adminUsers } = require('../controllers/indexController.js');
+const adminCheck = require('../middlewares/adminCheck.js');
+const router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
-router.get('/aboutUs', function (req, res, next) {
-  res.render('aboutUs', { title: 'Sobre nosotros'});
-});
-
-router.get('/list', function(req, res, next) {
-  res.render('list', { title: 'productos' });
-});
+router
+    .get('/', index)
+    .get('/admin',adminCheck, admin)
+    .get('/admin/products',adminCheck, adminProducts)
+    .get('/admin/users', adminCheck, adminUsers)
+    .get('/aboutUs', aboutUs)
 
 module.exports = router;

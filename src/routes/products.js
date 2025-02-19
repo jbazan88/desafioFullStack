@@ -1,15 +1,17 @@
 const express = require('express');
+const { list, detail, add, create, edit, update, remove, search, showCart} = require('../controllers/productController.js');
+const userSessionCheck = require('../middlewares/userSessionCheck.js');
 const router = express.Router();
-const productControllers = require('../controllers/productControllers');
 
-
-router.get('/admin', productControllers.admin);
-router.get('/admin/add', productControllers.add);
-router.post('/admin/create', productControllers.create);
-router.get('/admin/edit/:id', productControllers.editForm); // Cambiado a editForm
-router.post('/admin/edit/:id', productControllers.edit); // Cambiado a edit
-router.post('/admin/update/:id', productControllers.update);
-router.get('/admin/delete/:id', productControllers.remove);
-
+router
+    .get('/', list)
+    .get('/detail/:id',detail)
+    .get('/add',add) //rendieriza el formulario
+    .post('/create',create) //recibe los datos del formulario
+    .get('/edit/:id',edit)
+    .put('/update/:id',update)
+    .delete('/remove/:id',remove)
+    .get('/search',search)
+    .get('/cart',userSessionCheck, showCart)
 
 module.exports = router;
