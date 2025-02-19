@@ -33,5 +33,16 @@
     "validate": true,
     "lock": false,
     "rol": "user"
+  },
+  {
+    "id": "3f377178-18f1-4ba9-a5c1-e50f04589558",
+    "name": "qwe",
+    "surname": "qwe",
+    "email": "user@royal.com",
+    "password": "$2b$10$8.fgz4V34OcPXFmsAkqmR.oUN/NRH5XAUGnzeHQOIOzpnil9SpeyK",
+    "token": null,
+    "validate": true,
+    "lock": false,
+    "rol": "user"
   }
 ]
