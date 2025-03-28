@@ -45,7 +45,8 @@
                                         <h1 class="h1">Volkswagen Vento</h1>
                                         <h3 class="h2">Un sedán con personalidad</h3>
                                         <p>
-                                            innovador en cada detalle: diseño refinado, faros y luces traseras LED en todas las versiones, motor TSI, tecnología de última generación y confort.
+                                            innovador en cada detalle: diseño refinado, faros y luces traseras LED en
+                                            todas las versiones, motor TSI, tecnología de última generación y confort.
                                         </p>
                                     </div>
                                 </div>
@@ -63,19 +64,20 @@
                                         <h1 class="h1">Chevrolet Cruze</h1>
                                         <h3 class="h2">La conexión perfecta entre deseo y realidad</h3>
                                         <p>
-                                            Un vehículo ágil y moderno, ideado para brindarte la mejor tecnología, en cualquier dirección que tomes.</p>
+                                            Un vehículo ágil y moderno, ideado para brindarte la mejor tecnología, en
+                                            cualquier dirección que tomes.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#hero-carousel"
-                    role="button" data-bs-slide="prev">
+                <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#hero-carousel" role="button"
+                    data-bs-slide="prev">
                     <i class="fas fa-chevron-left"></i>
                 </a>
-                <a class="carousel-control-next text-decoration-none w-auto pe-3" href="#hero-carousel"
-                    role="button" data-bs-slide="next">
+                <a class="carousel-control-next text-decoration-none w-auto pe-3" href="#hero-carousel" role="button"
+                    data-bs-slide="next">
                     <i class="fas fa-chevron-right"></i>
                 </a>
             </div>
@@ -88,65 +90,40 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12 col-md-4 mb-4">
-                            <div class="card h-100">
-                                <a href="#">
-                                    <img src="/images/shop_01.png" class="card-img-top" alt="...">
-                                </a>
-                                <div class="card-body">
-                                    <ul class="list-unstyled d-flex justify-content-between">
-
-                                        <li class="text-muted text-right">$20.000</li>
-                                    </ul>
-                                    <a href="#" class="h2 text-decoration-none text-dark">Honda Civic</a>
-                                    <p class="card-text">
-                                        Cuenta con una silueta más estilizada sin dejar de lado la tecnología avanzada que caracteriza a este modelo.
-                                    </p>
-                                    
-                                </div>
+                    <% products.products.forEach((product) => { %>
+                        
+                           <div class="col-12 col-sm-6 col-lg-3 my-5">
+                            
+                                <section class="card h-100 shadow ">
+                                    <a href="/detail/<%= product.id %>" class="text-decoration-none text-reset">
+                                <figure class="product-box_image">
+                                <img width="80%" class="card-img-top" src="<%= product.images[0].name %>"
+                                     alt="imagen de producto">
+                                </figure>
+                                <article class="position-relative ps-3 ">
+                                <p class="product-year">
+                                  Año: <%= product.year %>
+                                </p>
+                                <p class="product-brand">
+                                  <b>
+                                    <%= product.make %> <%= product.model %>
+                                  </b>
+                                </p>
+                                <p class="product-price">
+                                  u$d <%= toThousand(product.price) %>
+                                </p>
+                                </article>
+                            </a>
+                                </section>
                             </div>
-                        </div>
-                        <div class="col-12 col-md-4 mb-4">
-                            <div class="card h-100">
-                                <a href="#">
-                                    <img src="/images/shop_02.png" class="card-img-top" alt="...">
-                                </a>
-                                <div class="card-body">
-                                    <ul class="list-unstyled d-flex justify-content-between">
-                                        <li class="text-muted text-right">$22.000</li>
-                                    </ul>
-                                    <a href="#" class="h2 text-decoration-none text-dark">Ford Focus</a>
-                                    <p class="card-text">
-                                        Diseño aerodinámico y moderno que reduce la resistencia al viento
-                                    </p>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4 mb-4">
-                            <div class="card h-100">
-                                <a href="#">
-                                    <img src="/images/shop_04.png" class="card-img-top" alt="...">
-                                </a>
-                                <div class="card-body">
-                                    <ul class="list-unstyled d-flex justify-content-between">
-                                        <li class="text-muted text-right">$21.000</li>
-                                    </ul>
-                                    <a href="#" class="h2 text-decoration-none text-dark">Volkswagen
-                                        Vento</a>
-                                    <p class="card-text">
-                                        Diseño deportivo con líneas bien definidas
-                                    </p>
-                                    
-                                </div>
-                            </div>
-                        </div>
+                        <% }) %>
+                        
                     </div>
                 </div>
             </section>
 
         </main>
-
+        
         <%-include("./partials/footer.ejs")%>
 
 </html>

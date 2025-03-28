@@ -1,8 +1,8 @@
 
 const fs = require('fs')
 const path = require('path')
-
-const {toThousand} = require('../models/utils.js')
+const db = require('../database/models')
+const {toThousand} = require('../utils/utils.js')
 const { readJson, saveJson } = require('../data/index.js')
 
 module.exports = { 
@@ -14,17 +14,26 @@ module.exports = {
             toThousand
         })
     },
-    detail: (req, res) => {
-        
-        const products = readJson('products.json')
-        const product = products.find(product => product.id === +req.params.id)
-        
-        return res.render('products/productDetail',{
-            ...product,
-            admin : req.query.admin,
-            toThousand
-        })
-    },
+    detail: async (req, res) => {
+        try {
+          const product = await db.Product.findByPk(req.params.id, {
+            include: ['images'],
+          });
+    
+          if (!product) {
+            return res.status(404).send('Producto no encontrado');
+          }
+    
+          return res.render('products/productDetail', {
+            ...product.dataValues,
+            admin: req.query.admin,
+            toThousand,
+          });
+        } catch (error) {
+          console.error(error);
+          return res.status(500).send('Error interno del servidor');
+        }
+      },
 
     add: (req, res) => {
         return res.render('products/productAdd',{

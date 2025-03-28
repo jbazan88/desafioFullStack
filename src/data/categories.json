@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "name": "Sedan"
+    },
+    {
+        "id": 2,
+        "name": "hatchback"
+    },
+    {
+        "id": 3,
+        "name": "SUV"
+    },
+    {
+        "id": 4,
+        "name": "camioneta"
+    },
+    {
+        "id": 5,
+        "name": "Pickup"
+    },
+    {
+        "id": 6,
+        "name": "Minivan"
+    },
+    {
+        "id": 7,
+        "name": "Van"
+    },
+    {
+        "id": 8,
+        "name": "Convertible"
+    }
+]

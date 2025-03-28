@@ -1,4 +1,4 @@
-const { v4: uuidv4, validate } = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcrypt');
 const { readJson, saveJson } = require('../data/index.js');
 
