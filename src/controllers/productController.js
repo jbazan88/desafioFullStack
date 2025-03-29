@@ -6,18 +6,24 @@ const {toThousand} = require('../utils/utils.js')
 const { readJson, saveJson } = require('../data/index.js')
 
 module.exports = { 
-    list: (req,res) => {
+    list: async (req,res) => {
 
-        const products = readJson('products.json')
-        return res.render('products/productsList',{
-            products,
-            toThousand
-        })
+        try {
+            const products = await db.Product.findAll({
+                include : ['images']
+            })
+            return res.render('products/productsList',{
+                products,
+                toThousand
+            })
+        } catch (error) {
+            console.log(error);   
+        }
     },
     detail: async (req, res) => {
         try {
           const product = await db.Product.findByPk(req.params.id, {
-            include: ['images'],
+            include: ['images','model','make'],
           });
     
           if (!product) {
@@ -35,77 +41,152 @@ module.exports = {
         }
       },
 
-    add: (req, res) => {
-        return res.render('products/productAdd',{
-            categories
-        })
-    },
+    add: async (req, res) => {
 
-    create: (req, res) => {
-
-        const products = readJson('products.json')
-        const {name, price, discount, description, category} = req.body
-
-        const newProduct = {
-            id : products[products.length - 1].id + 1,
-            name : name.trim(),
-            description : description.trim(),
-            price : +price,
-            image : "default-image.png",
-            category
+        try {
+            const [makes, models, transmissions, origins, states, categories] = await Promise.all([
+                db.Make.findAll(),
+                db.Pattern.findAll(),
+                db.Transmission.findAll(),
+                db.Origin.findAll(),
+                db.State.findAll(),
+                db.Category.findAll()
+            ]) 
+            return res.render('products/productAdd',{
+                models,
+                makes,
+                transmissions,
+                origins,
+                states,
+                categories
+            })
+            
+        } catch (error) {
+            console.log(error);
+            
         }
 
-        products.push(newProduct)
-
-        saveJson('products.json',products)
-
-        return res.redirect('/products/detail/' + newProduct.id)
+       
     },
 
-    edit: (req, res ) => {
-        
-        const {id} = req.params
-        const products = readJson('products.json')
-        
-        const product = products.find(product => product.id === +id)
+    create: async (req, res) => {
 
-        return res.render('products/productEdit',{
-            categories,
-            ...product
-        })
-    },
-    update: function(req, res) {
+        try {
+            const {price, model, make, transmission, mileage, state, category, year, origin, description} = req.body;
 
-        const products = readJson('products.json')
+            const product = await db.Product.create({
+                makeId : make,
+                patternId : model,
+                categoryId : category,
+                stateId : state,
+                description : description.trim(),
+                originId : origin,
+                year,
+                mileage,
+                transmissionId : transmission,
+                price
+            })
 
-        const {name, price, discount, description, category} = req.body
-        
-        const productsModify = products.map(product => {
-            if(product.id === +req.params.id){
-                product.name = name.trim();
-                product.price = +price;
-                product.description = description.trim();
-                product.category = category;
+            if(req.file) {
+                await db.Image.create({
+                    name : req.file.filename,
+                    productId : product.id
+                })
             }
-            return product
-        })
 
-        saveJson('products.json',productsModify)
+            return res.redirect('/admin')
 
-        return res.redirect('/admin')
+
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    edit: async  (req, res ) => {
+
+        try {
+            const {id} = req.params
+            const [product, makes, models, transmissions, origins, states, categories] = await Promise.all([
+                db.Product.findByPk(id),
+                db.Make.findAll(),
+                db.Pattern.findAll(),
+                db.Transmission.findAll(),
+                db.Origin.findAll(),
+                db.State.findAll(),
+                db.Category.findAll()
+            ]) 
+
+            return res.render('products/productEdit',{
+                makes, 
+                models, 
+                transmissions, 
+                origins, 
+                states, 
+                categories,
+                ...product.dataValues
+            })
+        } catch (error) {
+            console.log(error);   
+        }
+       
+    },
+    update: async (req, res) => {
+
+        try {
+            const {price, model, make, transmission, mileage, state, category, year, origin, description} = req.body;
+
+            await db.Product.update(
+                {
+                    makeId : make,
+                    patternId : model,
+                    categoryId : category,
+                    stateId : state,
+                    description : description.trim(),
+                    originId : origin,
+                    year,
+                    mileage,
+                    transmissionId : transmission,
+                    price
+                },
+                {
+                    where : {
+                        id : req.params.id
+                    }
+                }
+            )
+
+            return res.redirect('/admin')
+
+        } catch (error) {
+            console.log(error);   
+        }
     
     },
-    remove: function(req,res){
-        
-        const products = readJson('products.json');
-        const {id} = req.params;
+    remove: async (req,res) => {
 
-        const productsModify = products.filter(product => product.id !== +id)
+        try {
+            const {id} = req.params;
 
-        saveJson('products.json',productsModify)
+            db.Product.destroy({
+                where : {
+                    id
+                }
+            });
 
-        return res.redirect('/admin')
+            db.Image.destroy({
+                where : {
+                    productId : id
+                }
+            })
 
+            // TODO: eliminar los archivos de la o las imágenes
+
+            return res.redirect('/admin');
+
+        } catch (error) {
+            console.log(error);
+            
+        }
     },
 
     search: function(req, res) {

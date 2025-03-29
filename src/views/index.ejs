@@ -90,14 +90,14 @@
                         </div>
                     </div>
                     <div class="row">
-                    <% products.products.forEach((product) => { %>
+                    <% products.forEach((product) => { %>
                         
                            <div class="col-12 col-sm-6 col-lg-3 my-5">
                             
                                 <section class="card h-100 shadow ">
-                                    <a href="/detail/<%= product.id %>" class="text-decoration-none text-reset">
+                                    <a href="/products/detail/<%= product.id %>" class="text-decoration-none text-reset">
                                 <figure class="product-box_image">
-                                <img width="80%" class="card-img-top" src="<%= product.images[0].name %>"
+                                <img width="80%" class="card-img-top"src="<%= product.images.length ? product.images[0].name : '/images/default.jpg'%>" 
                                      alt="imagen de producto">
                                 </figure>
                                 <article class="position-relative ps-3 ">
@@ -106,7 +106,7 @@
                                 </p>
                                 <p class="product-brand">
                                   <b>
-                                    <%= product.make %> <%= product.model %>
+                                    <%= product.make.name %> <%= product.model.name %>
                                   </b>
                                 </p>
                                 <p class="product-price">

@@ -7,13 +7,8 @@ module.exports = {
       
         try {
 
-            const products = await db.Category.findByPk(1,{
-                include : [
-                    {
-                        association : 'products',
-                        include : ['images']
-                    }
-                ]
+            const products = await db.Product.findAll({
+                include : ['images','make','model']
             });
 
             return res.render('index', { 
@@ -29,8 +24,29 @@ module.exports = {
     aboutUs: (req, res) => {
         return res.render('aboutUs')
     },
-    admin: (req, res) => {
-        return res.render('admin')
+    admin: async (req, res) => {
+
+        try {
+            const { page, perPage, category, search } = req.query
+
+            const products = await db.Product.findAll({
+                include : ['images','make','model']
+            });
+            return res.render('admin', {
+                products,
+                currentPage: page || 1,
+              /*   totalPages: total,
+                categories, */
+                filterCategory: category,
+                search,
+                toThousand
+            })
+            
+            
+        } catch (error) {
+            console.log(error);
+            
+        }
     },
     adminProducts: (req, res) => {
         

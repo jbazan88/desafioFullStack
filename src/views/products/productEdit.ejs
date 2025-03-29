@@ -1,40 +1,104 @@
 <!DOCTYPE html>
 <html lang="es">
-<%- include('../partials/head', {title: 'Editar Producto'}) %>
-<body>
-    <%- include('../partials/header') %>
-    <main>
-        <section class="bg-white py-5">
-            <div class="container row text-center py-3">
-        <h1>Editar Producto</h1>
-    <form method="POST" action="/admin/edit/<%= product.id %>">
-        <label for="año">Año:</label><br>
-        <textarea id="año" name="año" required><%= product.año %></textarea><br><br>
+<%- include('../partials/head', {title: 'Editar Producto' }) %>
 
-        <label for="name">Marca:</label><br>
-        <input type="text" id="name" name="name" value="<%= product.marca %>" required><br><br>
+    <body>
+        <%- include('../partials/header') %>
+            <main>
+                <section class="container products-wrapper">
+                    <div class="container row text-center py-3 mx-auto">
+                        <h1>Editar producto</h1>
+                        <div class="col-12 col-md-8 mx-auto">
+                            <section class="card h-100 shadow bg-white">
+                                <div class="card-body">
+                                    <form method="POST" class="row" action="/products/update/<%= id %>?_method=PUT">
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <label class="form-label" for="make">Marca:</label>
+                                            <select class="form-select" name="make" id="">
+                                                <% makes.forEach(make => { %>
+                                                    <option value="<%= make.id %>" <%= make.id == makeId && 'selected' %>><%= make.name %></option>
+                                                <% }) %>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <label class="form-label" for="model">Modelo:</label>
+                                            <select class="form-select" name="model" id="">
+                                                <% models.forEach(model => { %>
+                                                    <option value="<%= model.id %>"  <%= model.id == patternId && 'selected' %>><%= model.name %></option>
+                                                <% }) %>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <label class="form-label" for="state">Estado:</label>
+                                            <select class="form-select" name="state" id="">
+                                                <% states.forEach(state => { %>
+                                                    <option value="<%= state.id %>"  <%= state.id == stateId && 'selected' %>><%= state.name %></option>
+                                                <% }) %>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <label class="form-label" for="category">Categoría:</label>
+                                            <select class="form-select" name="category" id="">
+                                                <% categories.forEach(category => { %>
+                                                    <option value="<%= category.id %>"  <%= category.id == categoryId && 'selected' %>><%= category.name %></option>
+                                                <% }) %>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-md-4 mb-3">
+                                            <label class="form-label" for="year">Año:</label>
+                                            <input class="form-control" id="year" name="year" type="number" required value="<%= year %>"/>
+                                        </div>
+                                        <div class="col-12 col-md-4 mb-3">
+                                            <label class="form-label" for="mileage">kilometraje:</label>
+                                            <input class="form-control" id="mileage" name="mileage" type="number" value="<%= mileage %>"
+                                                required/>
+                                        </div> 
+                                        <div class="col-12 col-md-4 mb-3">
+                                            <label class="form-label" for="price">Precio:</label>
+                                            <input class="form-control" id="price" name="price" type="number" required value="<%= price %>"/>
 
-        <label for="description">Modelo:</label><br>
-        <textarea id="description" name="description" required><%= product.modelo %></textarea><br><br>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <label class="form-label" for="transmission">Transmision:</label>
+                                            <select class="form-select" name="transmission" id="">
+                                                <% transmissions.forEach(transmission => { %>
+                                                    <option value="<%= transmission.id %>"  <%= transmission.id == transmissionId && 'selected' %>><%= transmission.name %></option>
+                                                <% }) %>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <label class="form-label" for="origin">Origen:</label>
+                                            <select class="form-select" name="origin" id="">
+                                                <% origins.forEach(origin => { %>
+                                                    <option value="<%= origin.id %>"  <%= origin.id == originId && 'selected' %>><%= origin.country %></option>
+                                                <% }) %>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label" for="description">Descripción:</label>
 
-        <label for="año">kilometraje:</label><br>
-        <textarea id="kilometraje" name="kilometraje" required><%= product.kilometraje %></textarea><br><br>
+                                            <textarea name="description" class="form-control" style="resize: none;"><%= description %></textarea>
+                                        </div>    
+                                     
+                                        <div class="col-12 d-flex justify-content-around">
+                                            <div>
+                                                <label class="btn btn-secondary" for="image">Cambiar imágen</label>
+                                                <input type="file" id="image" name="image" hidden>
+                                            </div>
+                                            <button class="btn btn-primary" type="submit">Guardar Cambios</button>
+                                        </div>        
+                                    </form>
+                                </div>
+                            </section>
+                        </div>
 
-        <label for="año">transmision:</label><br>
-        <textarea id="transmision" name="transmision" required><%= product.transmision %></textarea><br><br>
+                    </div>
+                    <div class="container d-flex justify-content-end">
+                        <a href="/admin">Volver a la lista</a>
+                    </div>
+                </section>
+            </main>
+            <%- include('../partials/footer') %>
+    </body>
 
-        <label for="precio">precio:</label><br>
-        <textarea id="precio" name="precio" required><%= product.precio %></textarea><br><br>
-
-        <button type="submit">Guardar Cambios</button>
-    </form>
-    
-</div>
-<div class="container d-flex justify-content-end">
-<a href="/admin">Volver a la lista</a>
-</div>
-</section>
-    </main>
-    <%- include('../partials/footer') %>
-</body>
 </html>

@@ -1,54 +1,60 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<%-include(".. /partials/head.ejs", {title: 'Administración' })%>
+<%-include("./partials/head.ejs", {title: 'Administración' })%>
 
-    <%-include(".. /partials/headerAdmin.ejs")%>
+    <%-include("./partials/headerAdmin.ejs")%>
 
         <main>
-            <section class="bg-white py-5">
+            <section class="container products-wrapper">
                 <div class="row text-center py-3">
                     <h1>Administración de Productos</h1>
                 </div>
-                <% products.forEach(product=> { %>
-                    <div class="container">
-                        <div class="row">
+                <div class="container d-flex justify-content-end">
+                    <button class="btn btn-primary btn-block mb-3" onclick="location.href='/products/add'">Agregar
+                        Nuevo Producto</button>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <% products.forEach(product=> { %>
+
                             <div class="col-12 col-md-4 mb-4">
                                 <div class="card h-100 shadow">
-                                    <img src="<%= product.imagen %>" class="card-img-top"
-                                        alt="<%= product.marca %> <%= product.modelo %>">
+                                    <img src="<%= product.images.length ? product.images[0].name : '/images/default.jpg'%>" class="card-img-top"
+                                        alt="<%= product.make.name %> <%= product.model.name %>">
                                     <div class="card-body">
                                         <p class="product-year">
-                                            Año: <%= product.año %>
+                                            Año: <%= product.year %>
                                         </p>
                                         <p class="product-brand">
                                             <b>
-                                                <%= product.marca %>
-                                                    <%= product.modelo %>
+                                                <%= product.make.name %>
+                                                    <%= product.model.name %>
                                             </b>
                                         </p>
                                         <p class="product-price">
-                                            u$d <%= product.precio %>
+                                            u$d <%= product.price %>
                                         </p>
-                                        <div class="product-actions">
-                                            <a href="/admin/edit/<%= product.id %>" class="edit-button">Editar</a>
-                                            <a href="/admin/delete/<%= product.id %>" class="delete-button">Eliminar</a>
+                                        <div class="d-flex gap-2 align-items-center justify-content-end">
+                                            <a href="/products/edit/<%= product.id %>" class="btn btn-sm btn-success">Editar</a>
+                                            <form action="/products/remove/<%= product.id %>?_method=DELETE" method="POST">
+
+                                                <button class="btn btn-sm btn-danger" style="font-size: 18px;">Eliminar</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
+                            <% }); %>
                     </div>
-                    <% }); %>
-                        </div>
-                        <div class="container d-flex justify-content-end">
-                            <button class="btn btn-primary btn-block mb-3" onclick="location.href='/admin/add'">Agregar
-                                Nuevo Producto</button>
-                        </div>
+                </div>
+            </div>
 
             </section>
         </main>
 
-        <%-include(".. /partials/footer.ejs")%>
+        <%-include("./partials/footer.ejs")%>
 
 </html>
