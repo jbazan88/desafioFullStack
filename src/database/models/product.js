@@ -15,6 +15,31 @@ module.exports = (sequelize, DataTypes) => {
         as: 'category',
         foreignKey: 'categoryId'
       });
+
+      Product.belongsTo(models.Make, {
+        as: 'make',
+        foreignKey: 'makeId'
+      });
+
+      Product.belongsTo(models.Pattern, {
+        as: 'model',
+        foreignKey: 'patternId'
+      });
+
+      Product.belongsTo(models.Transmission, {
+        as: 'transmission',
+        foreignKey: 'transmissionId'
+      });
+
+      Product.belongsTo(models.State, {
+        as: 'state',
+        foreignKey: 'stateId'
+      });
+
+      Product.belongsTo(models.Origin, {
+        as: 'origin',
+        foreignKey: 'originId'
+      });
       
       Product.hasMany(models.Image, {
         as: 'images',
@@ -24,11 +49,16 @@ module.exports = (sequelize, DataTypes) => {
   }
   Product.init({
     year: DataTypes.INTEGER,
-    make: DataTypes.STRING,
-    model: DataTypes.STRING,
     price: DataTypes.INTEGER,
     description: DataTypes.STRING,
-    categoryId: DataTypes.INTEGER
+    mileage: DataTypes.INTEGER,
+    categoryId: DataTypes.INTEGER,
+    makeId: DataTypes.INTEGER,
+    patternId: DataTypes.INTEGER,
+    stateId : DataTypes.INTEGER,
+    transmissionId : DataTypes.INTEGER,
+    originId : DataTypes.INTEGER,
+
   }, {
     sequelize,
     modelName: 'Product',

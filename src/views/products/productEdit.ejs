@@ -6,25 +6,25 @@
     <main>
         <section class="bg-white py-5">
             <div class="container row text-center py-3">
-        <h1>Editar Producto</h1>
-    <form method="POST" action="/admin/edit/<%= product.id %>">
-        <label for="año">Año:</label><br>
-        <textarea id="año" name="año" required><%= product.año %></textarea><br><br>
+        <h1>Editar producto</h1>
+    <form method="POST" action="/admin/edit/<%= id %>">
+        <label for="year">Año:</label><br>
+        <textarea id="year" name="year" required><%= year %></textarea><br><br>
 
-        <label for="name">Marca:</label><br>
-        <input type="text" id="name" name="name" value="<%= product.marca %>" required><br><br>
+        <label for="make">Marca:</label><br>
+        <input type="text" id="make" name="make" value="<%= make %>" required><br><br>
 
-        <label for="description">Modelo:</label><br>
-        <textarea id="description" name="description" required><%= product.modelo %></textarea><br><br>
-
+        <label for="model">Modelo:</label><br>
+        <textarea id="model" name="model" required><%= model %></textarea><br><br>
+   <!--  
         <label for="año">kilometraje:</label><br>
-        <textarea id="kilometraje" name="kilometraje" required><%= product.kilometraje %></textarea><br><br>
+    <textarea id="kilometraje" name="kilometraje" required><%=  %></textarea><br><br>
 
         <label for="año">transmision:</label><br>
-        <textarea id="transmision" name="transmision" required><%= product.transmision %></textarea><br><br>
+        <textarea id="transmision" name="transmision" required><%=  %></textarea><br><br> -->
 
-        <label for="precio">precio:</label><br>
-        <textarea id="precio" name="precio" required><%= product.precio %></textarea><br><br>
+        <label for="price">Precio:</label><br>
+        <textarea id="price" name="price" required><%= price %></textarea><br><br>
 
         <button type="submit">Guardar Cambios</button>
     </form>

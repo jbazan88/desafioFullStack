@@ -1,14 +1,18 @@
 'use strict';
 
 const productsJson = require('../../data/products.json');
-const products = productsJson.map(({year,make,model,price,description}) => {
+const products = productsJson.map(({year,make,model,transmission, mileage,price,description}) => {
   return {
     year,
-    make,
-    model,
+    makeId : make,
+    patternId : model,
+    transmissionId : transmission,
+    stateId: 2,
+    originId : 1,
+    mileage,
     price,
     description,
-    categoryId: (1),
+    categoryId: 1,
     createdAt: new Date,
   updatedAt: new Date
   }
