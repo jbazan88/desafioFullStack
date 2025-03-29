@@ -29,6 +29,13 @@
                                 <input type="password" id="password" name="password" class="form-control" required />
                                 <label class="form-label py-2" for="loginPassword">Contraseña</label>
                             </div>
+                            <% if (locals.error) { %>
+                                <p class="alert alert-danger">
+                                    <%- locals.error && error %>
+                                </p>
+                            <% } %>
+                           
+                            
 
                             <div class="row mb-4">
                                 <div class="col-md-6 d-flex justify-content-center">
@@ -43,7 +50,6 @@
                                     <a href="#!">¿Olvido su contraseña?</a>
                                 </div>
                             </div>
-
                             <button type="submit" class="btn btn-primary btn-block mb-4">Ingresar</button>
 
                             <div class="text-center">
