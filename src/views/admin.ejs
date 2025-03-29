@@ -21,7 +21,7 @@
 
                             <div class="col-12 col-md-4 mb-4">
                                 <div class="card h-100 shadow">
-                                    <img src="<%= product.images[0].name %>" class="card-img-top"
+                                    <img src="<%= product.images.length ? product.images[0].name : '/images/default.jpg'%>" class="card-img-top"
                                         alt="<%= product.make %> <%= product.model %>">
                                     <div class="card-body">
                                         <p class="product-year">

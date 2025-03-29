@@ -71,25 +71,38 @@ module.exports = {
 
     create: async (req, res) => {
 
-        const {name, price, model, make, transmission, milage} = req.body
-        return res.send(req.body)
-        const newProduct = {
-            id : products[products.length - 1].id + 1,
-            name : name.trim(),
-            description : description.trim(),
-            price : +price,
-            image : "default-image.png",
-            category
+        try {
+            const {price, model, make, transmission, mileage, state, category, year, origin, description} = req.body;
+
+            const product = await db.Product.create({
+                makeId : make,
+                patternId : model,
+                categoryId : category,
+                stateId : state,
+                description : description.trim(),
+                originId : origin,
+                year,
+                mileage,
+                transmissionId : transmission,
+                price
+            })
+
+            if(req.file) {
+                await db.Image.create({
+                    name : req.file.filename,
+                    productId : product.id
+                })
+            }
+
+            return res.redirect('/admin')
+
+
+        } catch (error) {
+            console.log(error);
         }
-
-        products.push(newProduct)
-
-        saveJson('products.json',products)
-
-        return res.redirect('/products/detail/' + newProduct.id)
     },
 
-    edit: (req, res ) => {
+    edit: async  (req, res ) => {
         
         const {id} = req.params
         const products = readJson('products.json')

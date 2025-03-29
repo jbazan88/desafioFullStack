@@ -97,7 +97,7 @@
                                 <section class="card h-100 shadow ">
                                     <a href="/products/detail/<%= product.id %>" class="text-decoration-none text-reset">
                                 <figure class="product-box_image">
-                                <img width="80%" class="card-img-top" src="<%= product.images[0].name %>"
+                                <img width="80%" class="card-img-top"src="<%= product.images.length ? product.images[0].name : '/images/default.jpg'%>" 
                                      alt="imagen de producto">
                                 </figure>
                                 <article class="position-relative ps-3 ">
