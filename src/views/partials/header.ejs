@@ -37,9 +37,21 @@
                         <a class="nav-icon position-relative text-decoration-none" href="/products/cart">
                             <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                         </a>
-                        <a class="nav-icon position-relative text-decoration-none" href="/users/login">
+                        <% if (locals.userLogin) { %>
+                            <% if (userLogin.rol == 1) { %>
+                                <a class="nav-icon position-relative text-decoration-none" href="/admin">
+                                    <i class="fa fa-fw fa-user-cog text-dark mr-3"></i>
+                                </a>
+                            <% } %>
+                            <a class="nav-icon position-relative text-decoration-none" href="/users/logout">
+                                <i class="fa fa-fw fa-sign-out-alt text-dark mr-3"></i>
+                            </a>
+                        <% }else { %>
+                            <a class="nav-icon position-relative text-decoration-none" href="/users/login">
                             <i class="fa fa-fw fa-user text-dark mr-3"></i>
                         </a>
+                        <% } %>
+                     
                     </div>
                 </div>
     
