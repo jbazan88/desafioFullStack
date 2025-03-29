@@ -26,11 +26,6 @@ body, ul, li, p, a, label, input, div {
 .bg-light { background-color: #e9eef5 !important;}
 .bg-black { background-color: #1d242d !important;}
 .bg-success { background-color: #5fc8e6 !important;}
-.btn-success {
-  background-color: #5fc8e6 !important;
-  border-color: #5fc8e6 !important;
-  color: #fff;
-}
 .pagination .page-link:hover {color: #000;}
 .pagination .page-link:hover, .pagination .page-link.active {
   background-color: #5fc8e6;

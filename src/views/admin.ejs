@@ -36,9 +36,12 @@
                                         <p class="product-price">
                                             u$d <%= product.price %>
                                         </p>
-                                        <div class="product-actions">
-                                            <a href="/products/edit/<%= product.id %>" class="edit-button">Editar</a>
-                                            <a href="/products/delete/<%= product.id %>" class="delete-button">Eliminar</a>
+                                        <div class="d-flex gap-2 align-items-center justify-content-end">
+                                            <a href="/products/edit/<%= product.id %>" class="btn btn-sm btn-success">Editar</a>
+                                            <form action="/products/remove/<%= product.id %>?_method=DELETE" method="POST">
+
+                                                <button class="btn btn-sm btn-danger" style="font-size: 18px;">Eliminar</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

@@ -162,17 +162,31 @@ module.exports = {
         }
     
     },
-    remove: function(req,res){
-        
-        const products = readJson('products.json');
-        const {id} = req.params;
+    remove: async (req,res) => {
 
-        const productsModify = products.filter(product => product.id !== +id)
+        try {
+            const {id} = req.params;
 
-        saveJson('products.json',productsModify)
+            db.Product.destroy({
+                where : {
+                    id
+                }
+            });
 
-        return res.redirect('/admin')
+            db.Image.destroy({
+                where : {
+                    productId : id
+                }
+            })
 
+            // TODO: eliminar los archivos de la o las imágenes
+
+            return res.redirect('/admin');
+
+        } catch (error) {
+            console.log(error);
+            
+        }
     },
 
     search: function(req, res) {
