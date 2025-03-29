@@ -22,19 +22,19 @@
                             <div class="col-12 col-md-4 mb-4">
                                 <div class="card h-100 shadow">
                                     <img src="<%= product.images.length ? product.images[0].name : '/images/default.jpg'%>" class="card-img-top"
-                                        alt="<%= product.make %> <%= product.model %>">
+                                        alt="<%= product.make.name %> <%= product.model.name %>">
                                     <div class="card-body">
                                         <p class="product-year">
                                             Año: <%= product.year %>
                                         </p>
                                         <p class="product-brand">
                                             <b>
-                                                <%= product.make %>
-                                                    <%= product.model %>
+                                                <%= product.make.name %>
+                                                    <%= product.model.name %>
                                             </b>
                                         </p>
                                         <p class="product-price">
-                                            u$d <%= product.precio %>
+                                            u$d <%= product.price %>
                                         </p>
                                         <div class="product-actions">
                                             <a href="/products/edit/<%= product.id %>" class="edit-button">Editar</a>

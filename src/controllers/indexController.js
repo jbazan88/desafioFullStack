@@ -30,7 +30,7 @@ module.exports = {
             const { page, perPage, category, search } = req.query
 
             const products = await db.Product.findAll({
-                include : ['images']
+                include : ['images','make','model']
             });
             return res.render('admin', {
                 products,

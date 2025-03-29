@@ -103,36 +103,63 @@ module.exports = {
     },
 
     edit: async  (req, res ) => {
-        
-        const {id} = req.params
-        const products = readJson('products.json')
-        
-        const product = products.find(product => product.id === +id)
 
-        return res.render('products/productEdit',{
-            categories,
-            ...product
-        })
+        try {
+            const {id} = req.params
+            const [product, makes, models, transmissions, origins, states, categories] = await Promise.all([
+                db.Product.findByPk(id),
+                db.Make.findAll(),
+                db.Pattern.findAll(),
+                db.Transmission.findAll(),
+                db.Origin.findAll(),
+                db.State.findAll(),
+                db.Category.findAll()
+            ]) 
+
+            return res.render('products/productEdit',{
+                makes, 
+                models, 
+                transmissions, 
+                origins, 
+                states, 
+                categories,
+                ...product.dataValues
+            })
+        } catch (error) {
+            console.log(error);   
+        }
+       
     },
-    update: function(req, res) {
+    update: async (req, res) => {
 
-        const products = readJson('products.json')
+        try {
+            const {price, model, make, transmission, mileage, state, category, year, origin, description} = req.body;
 
-        const {name, price, discount, description, category} = req.body
-        
-        const productsModify = products.map(product => {
-            if(product.id === +req.params.id){
-                product.name = name.trim();
-                product.price = +price;
-                product.description = description.trim();
-                product.category = category;
-            }
-            return product
-        })
+            await db.Product.update(
+                {
+                    makeId : make,
+                    patternId : model,
+                    categoryId : category,
+                    stateId : state,
+                    description : description.trim(),
+                    originId : origin,
+                    year,
+                    mileage,
+                    transmissionId : transmission,
+                    price
+                },
+                {
+                    where : {
+                        id : req.params.id
+                    }
+                }
+            )
 
-        saveJson('products.json',productsModify)
+            return res.redirect('/admin')
 
-        return res.redirect('/admin')
+        } catch (error) {
+            console.log(error);   
+        }
     
     },
     remove: function(req,res){
