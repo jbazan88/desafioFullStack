@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head', {title: 'Editar Producto'}) %>
+<body>
+    <%- include('../partials/header') %>
+    <main>
+        <section class="bg-white py-5">
+            <div class="container row text-center py-3">
+        <h1>Editar Producto</h1>
+    <form method="POST" action="/admin/edit/<%= product.id %>">
+        <label for="año">Año:</label><br>
+        <textarea id="año" name="año" required><%= product.año %></textarea><br><br>
+
+        <label for="name">Marca:</label><br>
+        <input type="text" id="name" name="name" value="<%= product.marca %>" required><br><br>
+
+        <label for="description">Modelo:</label><br>
+        <textarea id="description" name="description" required><%= product.modelo %></textarea><br><br>
+
+        <label for="año">kilometraje:</label><br>
+        <textarea id="kilometraje" name="kilometraje" required><%= product.kilometraje %></textarea><br><br>
+
+        <label for="año">transmision:</label><br>
+        <textarea id="transmision" name="transmision" required><%= product.transmision %></textarea><br><br>
+
+        <label for="precio">precio:</label><br>
+        <textarea id="precio" name="precio" required><%= product.precio %></textarea><br><br>
+
+        <button type="submit">Guardar Cambios</button>
+    </form>
+    
+</div>
+<div class="container d-flex justify-content-end">
+<a href="/admin">Volver a la lista</a>
+</div>
+</section>
+    </main>
+    <%- include('../partials/footer') %>
+</body>
+</html>

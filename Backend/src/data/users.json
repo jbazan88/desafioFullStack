@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "qwerty",
+    "surname": "qwerty",
+    "email": "admin@royal.com",
+    "password": "$2b$10$.4U/Btm2NqIGrZIj1L4MrODLOhaZJoLFihLsewVKzhmSpwkxnJ4/i",
+    "image": "",
+    "token": null,
+    "validated": true,
+    "lock": false,
+    "rolId": 1
+  },
+  {
+    "id": 2,
+    "name": "molestie",
+    "surname": "hendrerit",
+    "email": "tlowles1@eepurl.com",
+    "password": "wF9!j*q9x",
+    "image": "",
+    "token": null,
+    "validated": true,
+    "lock": false,
+    "rolId": 2
+  }
+]

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head', {title: 'Agregar Producto' }) %>
+
+    <body>
+        <%- include('../partials/header') %>
+            <main>
+                <section class="container products-wrapper">
+                    <div class="container row text-center py-3 mx-auto">
+                        <h1>Agregar producto</h1>
+                        <div class="col-12 col-md-8 mx-auto">
+                            <section class="card h-100 shadow bg-white">
+                                <div class="card-body">
+                                    <form method="POST" class="row" action="/products/create">
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <label class="form-label" for="make">Marca:</label>
+                                            <select class="form-select" name="make" id="">
+                                                <option value="" hidden selected>Seleccione...</option>
+                                                <% makes.forEach(make => { %>
+                                                    <option value="<%= make.id %>"><%= make.name %></option>
+                                                <% }) %>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <label class="form-label" for="model">Modelo:</label>
+                                            <select class="form-select" name="model" id="">
+                                                <option value="" hidden selected>Seleccione...</option>
+                                                <% models.forEach(model => { %>
+                                                    <option value="<%= model.id %>"><%= model.name %></option>
+                                                <% }) %>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <label class="form-label" for="state">Estado:</label>
+                                            <select class="form-select" name="state" id="">
+                                                <option value="" hidden selected>Seleccione...</option>
+                                                <% states.forEach(state => { %>
+                                                    <option value="<%= state.id %>"><%= state.name %></option>
+                                                <% }) %>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <label class="form-label" for="category">Categoría:</label>
+                                            <select class="form-select" name="category" id="">
+                                                <option value="" hidden selected>Seleccione...</option>
+                                                <% categories.forEach(category => { %>
+                                                    <option value="<%= category.id %>"><%= category.name %></option>
+                                                <% }) %>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-md-4 mb-3">
+                                            <label class="form-label" for="year">Año:</label>
+                                            <input class="form-control" id="year" name="year" type="number" required />
+                                        </div>
+                                        <div class="col-12 col-md-4 mb-3">
+                                            <label class="form-label" for="mileage">kilometraje:</label>
+                                            <input class="form-control" id="mileage" name="mileage" type="number"
+                                                required/>
+                                        </div> 
+                                        <div class="col-12 col-md-4 mb-3">
+                                            <label class="form-label" for="price">Precio:</label>
+                                            <input class="form-control" id="price" name="price" type="number" required />
+
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <label class="form-label" for="transmission">Transmision:</label>
+                                            <select class="form-select" name="transmission" id="">
+                                                <option value="" hidden selected>Seleccione...</option>
+                                                <% transmissions.forEach(transmission => { %>
+                                                    <option value="<%= transmission.id %>"><%= transmission.name %></option>
+                                                <% }) %>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <label class="form-label" for="origin">Origen:</label>
+                                            <select class="form-select" name="origin" id="">
+                                                <option value="" hidden selected>Seleccione...</option>
+                                                <% origins.forEach(origin => { %>
+                                                    <option value="<%= origin.id %>"><%= origin.country %></option>
+                                                <% }) %>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            <label class="form-label" for="description">Descripción:</label>
+
+                                            <textarea name="description" class="form-control" style="resize: none;"></textarea>
+                                        </div>    
+                                     
+                                        <div class="col-12 d-flex justify-content-around">
+                                            <div>
+                                                <label class="btn btn-secondary" for="image">Agregar imágen</label>
+                                                <input type="file" id="image" name="image" hidden>
+                                            </div>
+                                            <button class="btn btn-primary" type="submit">Guardar Cambios</button>
+                                        </div>        
+                                    </form>
+                                </div>
+                            </section>
+                        </div>
+
+                    </div>
+                    <div class="container d-flex justify-content-end">
+                        <a href="/admin">Volver a la lista</a>
+                    </div>
+                </section>
+            </main>
+            <%- include('../partials/footer') %>
+    </body>
+
+</html>

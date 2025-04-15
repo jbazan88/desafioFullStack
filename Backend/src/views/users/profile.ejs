@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head', {title: 'Perfil'}) %>
+<body>
+    <%- include('../partials/header') %>
+
+
+    <body>
+        <div class="container">
+            <div class="dashboard">
+                <div class="profile-info">
+                    <h2>Información del Perfil</h2>
+                    <p><strong>Nombre:</strong> <%= user.name %></p>
+                    <p><strong>Apellido:</strong> <%= user.surname %></p>
+                    <p><strong>Email:</strong> <%= user.email %></p>
+                    </div>
+    
+                <div class="dashboard-actions">
+                    <h3>Acciones del Dashboard</h3>
+                    <ul>
+                        <li><a href="/editar-perfil">Editar Perfil</a></li>
+                        <li><a href="/historial-pedidos">Ver Historial de Pedidos</a></li>
+                        <li><a href="/direcciones">Gestionar Direcciones</a></li>
+                        <li><a href="/configuracion">Configuración de Cuenta</a></li>
+                        </ul>
+                </div>
+            </div>
+        </div>
+    <%- include('../partials/footer') %>
+</body>
+</html>

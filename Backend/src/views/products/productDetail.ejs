@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head', {title: product.make.name}) %>
+<body>
+    <%- include('../partials/header') %>
+    <main>
+    	<div class="container mt-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <img src="<%= product.images.length ? product.images[0].name : 'default.jpg' %>" 
+                                 alt="<%= product.make.name %>" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="details">
+                        <h1 class="product-detail-title"><%= product.make.name %> <%= product.model.name %></h1>
+                        <p><%= product.mileage %> km</p>
+                        <p class="price"> u$d <%= toThousand(product.price) %></p>
+                        <a href="#" class="btn btn-outline-secondary">Simulá tu financiamiento ></a>
+                        <hr>
+                        <p>Año: <%= product.year %></p>
+                        <p>Transmisión: <%= product.transmission.name %></p>
+                        <p><%= product.description %></p>
+                        <a href="#" class="btn btn-primary btn-block">Reservar o Agendar visita</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <%- include('../partials/footer') %>
+</body>
+</html>

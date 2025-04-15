@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head', {title: 'Productos' }) %>
+
+    <body>
+        <%- include('../partials/header') %>
+            <main>
+                <div class="container products-wrapper">
+                    <div class="row">
+                        <div class="container products-wrapper">
+                            <div class="row">
+                                <% products.forEach((product) => { %>
+                                    
+                                       <div class="col-12 col-sm-6 col-lg-3 my-5">
+                                        
+                                            <section class="card h-100 shadow ">
+                                                <a href="/products/detail/<%= product.id %>" class="text-decoration-none text-reset">
+                                            <figure class="product-box_image">
+                                            <img width="80%" class="card-img-top" src="<%= product.images[0].name %>"
+                                                 alt="imagen de producto">
+                                            </figure>
+                                            <article class="position-relative ps-3 ">
+                                            <p class="product-year">
+                                              Año: <%= product.year %>
+                                            </p>
+                                            <p class="product-brand">
+                                              <b>
+                                                <%= product.make %> <%= product.model %>
+                                              </b>
+                                            </p>
+                                            <p class="product-price">
+                                              u$d <%= toThousand(product.price) %>
+                                            </p>
+                                            </article>
+                                        </a>
+                                            </section>
+                                        </div>
+                                    <% }) %>
+                                    
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="container d-flex justify-content-end">
+                        <a href="/admin">Volver a la lista</a>
+                    </div>
+                </div>
+            </main>
+            <%- include('../partials/footer') %>
+    </body>
+
+</html>

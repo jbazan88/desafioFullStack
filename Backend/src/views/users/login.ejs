@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%-include("../partials/head.ejs", {title: 'login' })%>
+
+    <%-include("../partials/header.ejs")%>
+
+        <main>
+            <div class="container card-body px-auto">
+                <section class=" bg-light rounded px-4">
+                    <div class="card-body">
+                        <ul class="nav nav-pills nav-justified mb-3" id="ex1">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="tab-login" href="./login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab-register" href="./register">Registro</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-pane fade show active" id="pills-login">
+                            <form action="/users/processLogin" method="POST" id="form-login">
+
+                                <div class="form-outline ">
+                                    <label for="loginName" class="form-label pt-2">Email</label>
+                                    <input type="email" id="email" class="form-control" name="email" required />
+                                </div>
+
+                                <div class="form-outline pt-2">
+                                    <label class="form-label pt-2" for="loginPassword">Contraseña</label>
+                                    <input type="password" id="password" name="password" class="form-control"
+                                        required />
+                                    </div>
+                                <% if (locals.error) { %>
+                                    <p class="alert alert-danger">
+                                        <%- locals.error && error %>
+                                    </p>
+                                    <% } %>
+
+
+
+                                        <div class="row mb-4 pt-3">
+                                            <div class="col-md-6 d-flex justify-content-center">
+                                                <div class="form-check mb-3 mb-md-0">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="loginCheck" checked />
+                                                    <label class="form-check-label" for="loginCheck"> recuerdame
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 d-flex justify-content-center">
+                                                <a href="#!">¿Olvido su contraseña?</a>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                        <button type="submit" class="btn btn-primary btn-block mb-4">Ingresar</button>
+
+                                        
+                                            <p>¿No es usuario? <a href="./register">Registrarse</a></p>
+                                        </div>
+                            </form>
+                        </div>
+
+                </section>
+            </div>
+        </main>
+        <%-include("../partials/footer.ejs")%>
+
+</html>
