@@ -1,14 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const { Product } = require('../../database/models'); // Asegúrate de que el modelo esté correctamente configurado
+const { Product, Image } = require('../../database/models'); 
 
-// Obtener todos los productos
 router.get('/', async (req, res) => {
   try {
-    const products = await Product.findAll();
+    const products = await Product.findAll({
+      include: [{
+        model: Image,
+        as: 'images', 
+        attributes: ['name'], 
+      },]
+    });
     res.json(products);
   } catch (error) {
-    res.status(500).json({ error: 'Error al obtener los productos' });
+    console.error('Error al obtener los productos con imágenes:', error);
+    res.status(500).json({ error: 'Error al obtener los productos con imágenes' });
   }
 });
 

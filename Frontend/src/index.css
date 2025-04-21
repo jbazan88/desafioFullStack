@@ -116,19 +116,3 @@ body, ul, li, p, a, label, input, div {
 }
 
 @media (min-width: 1200px) {}
-
-.navbar1 {
-  position: relative;
-  display: flex
-;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: .5rem;
-  padding-bottom: .5rem;
-}
-
-.di-flex {
-  display: flex 
-;
-}

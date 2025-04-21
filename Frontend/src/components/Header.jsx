@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 const Header = () => {
   return (
     <header>
-      <nav className="navbar1 navbar-expand-lg navbar-light shadow">
-        <div className="container  justify-content-between align-items-center">
+      <nav className="navbar navbar-expand-lg navbar-light shadow">
+        <div className="container d-flex justify-content-between align-items-center">
 
           <Link className="navbar-brand text-primary logo h1 align-self-center" to="/">
             RoyalCars

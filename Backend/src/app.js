@@ -22,7 +22,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../public')));
+app.use('/images', express.static(path.join(__dirname, 'public', 'images')));
 app.use(methodOverride('_method'));
 app.use(session({
   secret: 'miSecreto',
@@ -30,7 +30,7 @@ app.use(session({
   saveUninitialized: true
 }));
 app.use(cors({
-  origin: 'http://localhost:5000', // Cambia esto al puerto de tu frontend
+  origin: 'http://localhost:5000', // Puerto del frontend
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));

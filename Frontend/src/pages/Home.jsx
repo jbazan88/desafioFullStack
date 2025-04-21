@@ -6,7 +6,7 @@ const Home = () => {
 
   // Obtener productos desde la API
   useEffect(() => {
-    axios.get('http://localhost:3000/api/products') // Cambia la URL según tu backend
+    axios.get('http://localhost:3000/api/products')
       .then((response) => setProducts(response.data))
       .catch((error) => console.error('Error al obtener los productos:', error));
   }, []);
@@ -25,7 +25,7 @@ const Home = () => {
             <div className="container">
               <div className="row p-5">
                 <div className="mx-auto col-md-8 col-lg-6 order-lg-last">
-                  <img className="img-fluid" src="/images/banner_img_01.png" alt="Toyota Corolla" />
+                  <img className="img-fluid" src="http://localhost:3000/images/banner_img_01.png" alt="Toyota Corolla" />
                 </div>
                 <div className="col-lg-6 mb-0 d-flex align-items-center">
                   <div className="text-align-left align-self-center">
@@ -40,7 +40,6 @@ const Home = () => {
               </div>
             </div>
           </div>
-          {/* Agrega más items del carousel aquí */}
         </div>
         <a className="carousel-control-prev text-decoration-none w-auto ps-3" href="#hero-carousel" role="button" data-bs-slide="prev">
           <i className="fas fa-chevron-left"></i>
@@ -49,8 +48,6 @@ const Home = () => {
           <i className="fas fa-chevron-right"></i>
         </a>
       </div>
-
-      {/* Sección de productos */}
       <section className="bg-light">
         <div className="container py-5">
           <div className="row text-center py-3">
@@ -62,14 +59,14 @@ const Home = () => {
             {products.map((product) => (
               <div className="col-12 col-sm-6 col-lg-3 my-5" key={product.id}>
                 <section className="card h-100 shadow">
-                  <a href={`/products/detail/${product.id}`} className="text-decoration-none text-reset">
+                  <a href={`/products/${product.id}`} className="text-decoration-none text-reset">
                     <figure className="product-box_image">
-                      <img
-                        width="80%"
-                        className="card-img-top"
-                        src={product.images?.length ? product.images[0].name : '/images/default.jpg'}
-                        alt={`Imagen de ${product.make?.name} ${product.model?.name}`}
-                      />
+                    <img
+  width="80%"
+  className="card-img-top"
+  src={product.images?.length ? `/images/products/${product.images[0].name}` : '/images/default.jpg'}
+  alt={`Imagen de ${product.make?.name || 'Marca desconocida'} ${product.model?.name || 'Modelo desconocido'}`}
+/>
                     </figure>
                     <article className="position-relative ps-3">
                       <p className="product-year">Año: {product.year}</p>

@@ -8,8 +8,12 @@
     "transmission" : 1,
     "mileage" : 25000,
     "description": "El Honda Civic es un auto compacto de turismo fabricado por la empresa japonesa Honda. Se caracteriza por su equilibrio entre potencia y eficiencia, y por su diseño innovador.",
-    "image": "/images/products/shop_01.png"
-  },
+    "images": [
+      {
+        "name": "shop_01.png"
+      }
+      ]
+    },
   {
     "id": 2,
     "year": 2020,
