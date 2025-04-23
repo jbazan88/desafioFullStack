@@ -57,7 +57,7 @@ const Header = () => {
               <Link className="nav-icon position-relative text-decoration-none" to="/users/logout">
                 <i className="fa fa-fw fa-sign-out-alt text-dark mr-3"></i>
               </Link>
-              <Link className="nav-icon position-relative text-decoration-none" to="/users/login">
+              <Link className="nav-icon position-relative text-decoration-none" to="/user">
                 <i className="fa fa-fw fa-user text-dark mr-3"></i>
               </Link>
             </div>
