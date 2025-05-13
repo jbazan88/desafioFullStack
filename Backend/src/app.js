@@ -7,10 +7,15 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 const cors = require('cors');
 
-const indexRouter = require('./routes/index');
+/* const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
-const apiProductsRouter = require('./routes/api/products');
+*/
+const apiProductsRouter = require('./routes/products');
+const apiUsersRouter = require('./routes/users');
+const apiDropdownsRouter = require('./routes/dropdowns');
+const apiCartRouter = require('./routes/cart'); // Asegúrate de que esta ruta sea correcta{
+
 
 const app = express();
 
@@ -20,14 +25,18 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use('/images', express.static(path.join(__dirname, 'public', 'images')));
 app.use(methodOverride('_method'));
 app.use(session({
-  secret: 'miSecreto',
+  secret: 'miSecreto', // Cambia esto por un secreto más seguro
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false, // Cambiar a `false` para evitar sesiones vacías
+  cookie: {
+    httpOnly: true,
+    secure: false, // Cambiar a `true` si usas HTTPS
+    maxAge: 1000 * 60 * 60 * 24 // 1 día
+  }
 }));
 app.use(cors({
   origin: 'http://localhost:5000', // Puerto del frontend
@@ -42,10 +51,15 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use('/', indexRouter);
+/* app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
-app.use('/api/products', apiProductsRouter);
+*/
+app.use('/products', apiProductsRouter);
+app.use('/users', apiUsersRouter);
+app.use('/cart', apiCartRouter);
+app.use('/uploads/products', express.static(path.join(__dirname, 'uploads/products')));
+app.use('/api/dropdowns', apiDropdownsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

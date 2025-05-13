@@ -1,5 +1,41 @@
-const { body } = require('express-validator');
+const bcrypt = require('bcrypt');
+const { body, validationResult } = require('express-validator');
 const { User } = require('../database/models');
+
+const loginValidations = [
+  // Validación del email
+  body('email')
+    .notEmpty().withMessage('El email es obligatorio.')
+    .isEmail().withMessage('Debes ingresar un formato de email válido.')
+    .custom(async (value) => {
+      const user = await User.findOne({ where: { email: value } });
+      if (!user) {
+        throw new Error('El email no está registrado.');
+      }
+      return true;
+    }),
+
+  // Validación de la contraseña
+  body('password')
+    .notEmpty().withMessage('La contraseña es obligatoria.')
+    .custom(async (value, { req }) => {
+      const user = await User.findOne({ where: { email: req.body.email } });
+      if (!user || !bcrypt.compareSync(value, user.password)) {
+        throw new Error('La contraseña es incorrecta.');
+      }
+      req.user = user; // Guarda el usuario en `req.user` para usarlo más adelante
+      return true;
+    }),
+
+  // Manejo de errores
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+  }
+]
 
 const registerValidations = [
     // Validación del nombre
@@ -44,40 +80,4 @@ const registerValidations = [
             return true;
         })
 ];
-const loginValidations = [
-    // Validación del email
-    body('email')
-        .notEmpty().withMessage('El email es obligatorio.')
-        .isEmail().withMessage('Debes ingresar un formato de email válido.')
-        .custom(async (value) => {
-            const user = await User.findOne({ where: { email: value } });
-            if (!user) {
-                throw new Error('El email no está registrado.');
-            }
-            return true;
-        }),
-
-    // Validación de la contraseña
-    body('password')
-        .notEmpty().withMessage('La contraseña es obligatoria.')
-        .custom(async (value, { req }) => {
-            if (!req.user) {
-                return false;
-            }
-            const isMatch = await bcrypt.compare(value, req.user.password);
-            if (!isMatch) {
-                throw new Error('La contraseña es incorrecta.');
-            }
-            return true;
-        }),
-    (req, res, next) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-        next();
-    }
-];
-
-
 module.exports = { registerValidations, loginValidations };

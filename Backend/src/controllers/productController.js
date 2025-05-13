@@ -1,197 +1,137 @@
+const db = require('../database/models');
 
-const fs = require('fs')
-const path = require('path')
-const db = require('../database/models')
-const {toThousand} = require('../utils/utils.js')
-const upload = require('../middlewares/uploadMulter');
-// const { readJson, saveJson } = require('../data/index.js')
+module.exports = {
+  list: async (req, res) => {
+    try {
+      const products = await db.Product.findAll({
+        include: ['images'], // Relación con imágenes
+      });
+      return res.status(200).json(products);
+    } catch (error) {
+      console.error('Error al obtener los productos:', error);
+      return res.status(500).json({ error: 'Error al obtener los productos' });
+    }
+  },
 
-module.exports = { 
-    list: async (req,res) => {
+  detail: async (req, res) => {
+    try {
+      const product = await db.Product.findByPk(req.params.id, {
+        include: ['images', 'model', 'make', 'transmission'],
+      });
 
-        try {
-            const products = await db.Product.findAll({
-                include : ['images']
-            })
-            return res.render('products/productsList',{
-                products,
-                toThousand
-            })
-        } catch (error) {
-            console.log(error);   
-        }
-    },
-    detail: async (req, res) => {
-        try {
-          const product = await db.Product.findByPk(req.params.id, {
-            include: ['images','model','make', 'transmission'],
-          });
-    
-          if (!product) {
-            return res.status(404).send('Producto no encontrado');
-          }
-    
-          return res.render('products/productDetail', {
-            product,
-            admin: req.query.admin,
-            toThousand,
-          });
-        } catch (error) {
-          console.error(error);
-          return res.status(500).send('Error interno del servidor');
-        }
-      },
+      if (!product) {
+        return res.status(404).json({ error: 'Producto no encontrado' });
+      }
 
-    add: async (req, res) => {
+      return res.status(200).json(product);
+    } catch (error) {
+      console.error('Error al obtener el producto:', error);
+      return res.status(500).json({ error: 'Error al obtener el producto' });
+    }
+  },
 
-        try {
-            const [makes, models, transmissions, origins, states, categories] = await Promise.all([
-                db.Make.findAll(),
-                db.Pattern.findAll(),
-                db.Transmission.findAll(),
-                db.Origin.findAll(),
-                db.State.findAll(),
-                db.Category.findAll()
-            ]) 
-            return res.render('products/productAdd',{
-                models,
-                makes,
-                transmissions,
-                origins,
-                states,
-                categories
-            })
-            
-        } catch (error) {
-            console.log(error);
-            
-        }
+  create: async (req, res) => {
+    try {
+      const { price, model, make, transmission, mileage, state, category, year, origin, description } = req.body;
 
-       
-    },
+      const product = await db.Product.create({
+        makeId: make,
+        patternId: model,
+        categoryId: category,
+        stateId: state,
+        description: description.trim(),
+        originId: origin,
+        year,
+        mileage,
+        transmissionId: transmission,
+        price,
+      });
 
-    create: async (req, res) => {
+      if (req.file) {
+        await db.Image.create({
+          name: req.file.filename,
+          productId: product.id,
+        });
+      }
 
-        try {
-            const {price, model, make, transmission, mileage, state, category, year, origin, description} = req.body;
+      return res.status(201).json(product);
+    } catch (error) {
+      console.error('Error al crear el producto:', error);
+      return res.status(500).json({ error: 'Error al crear el producto' });
+    }
+  },
 
-            const product = await db.Product.create({
-                makeId : make,
-                patternId : model,
-                categoryId : category,
-                stateId : state,
-                description : description.trim(),
-                originId : origin,
-                year,
-                mileage,
-                transmissionId : transmission,
-                price
-            })
+  // Actualizar un producto
+  update: async (req, res) => {
+    try {
+      const { price, model, make, transmission, mileage, state, category, year, origin, description } = req.body;
 
-            if(req.file) {
-                await db.Image.create({
-                    name : req.file.filename,
-                    productId : product.id
-                })
-            }
+      const product = await db.Product.findByPk(req.params.id);
+      if (!product) {
+        return res.status(404).json({ error: 'Producto no encontrado' });
+      }
 
-            return res.redirect('/admin')
+      await product.update({
+        makeId: make,
+        patternId: model,
+        categoryId: category,
+        stateId: state,
+        description: description.trim(),
+        originId: origin,
+        year,
+        mileage,
+        transmissionId: transmission,
+        price,
+      });
 
+      return res.status(200).json(product);
+    } catch (error) {
+      console.error('Error al actualizar el producto:', error);
+      return res.status(500).json({ error: 'Error al actualizar el producto' });
+    }
+  },
 
-        } catch (error) {
-            console.log(error);
-        }
-    },
+  // Eliminar un producto
+  remove: async (req, res) => {
+    try {
+      const product = await db.Product.findByPk(req.params.id);
+      if (!product) {
+        return res.status(404).json({ error: 'Producto no encontrado' });
+      }
 
-    edit: async  (req, res ) => {
+      await product.destroy();
+      return res.status(204).send();
+    } catch (error) {
+      console.error('Error al eliminar el producto:', error);
+      return res.status(500).json({ error: 'Error al eliminar el producto' });
+    }
+  },
 
-        try {
-            const {id} = req.params
-            const [product, makes, models, transmissions, origins, states, categories] = await Promise.all([
-                db.Product.findByPk(id),
-                db.Make.findAll(),
-                db.Pattern.findAll(),
-                db.Transmission.findAll(),
-                db.Origin.findAll(),
-                db.State.findAll(),
-                db.Category.findAll()
-            ]) 
+  // Obtener datos para los dropdowns
 
-            return res.render('products/productEdit',{
-                makes, 
-                models, 
-                transmissions, 
-                origins, 
-                states, 
-                categories,
-                ...product.dataValues
-            })
-        } catch (error) {
-            console.log(error);   
-        }
-       
-    },
-    update: async (req, res) => {
+uploadImage: async (req, res) => {
+    try {
+      const productId = req.params.id;
 
-        try {
-            const {price, model, make, transmission, mileage, state, category, year, origin, description} = req.body;
-            let image = req.file ? req.file.filename : req.body.oldImage;
-            await db.Product.update(
-                {
-                    makeId : make,
-                    patternId : model,
-                    categoryId : category,
-                    stateId : state,
-                    description : description.trim(),
-                    originId : origin,
-                    year,
-                    mileage,
-                    transmissionId : transmission,
-                    price,
-                    image
-                },
-                {
-                    where : {id : req.params.id}
-                }
-            );
+      // Verificar si el producto existe
+      const product = await db.Product.findByPk(productId);
+      if (!product) {
+        return res.status(404).json({ error: 'Producto no encontrado' });
+      }
 
-            return res.redirect('/admin');
-
-        } catch (error) {
-            console.log(error);   
-        }
-    
-    },
-    remove: async (req,res) => {
-
-        try {
-            const {id} = req.params;
-
-            db.Product.destroy({
-                where : {
-                    id
-                }
-            });
-
-            db.Image.destroy({
-                where : {
-                    productId : id
-                }
-            })
-
-            // TODO: eliminar los archivos de la o las imágenes
-
-            return res.redirect('/admin');
-
-        } catch (error) {
-            console.log(error);
-            
-        }
-    },
-
-    search: function(req, res) {
-  
-    },
-    showCart : (req,res) => res.render('products/productCart')
-
-}
+      // Guardar la imagen en la base de datos
+      if (req.file) {
+        await db.Image.create({
+          name: req.file.filename,
+          productId: productId,
+        });
+        return res.status(201).json({ message: 'Imagen subida con éxito' });
+      } else {
+        return res.status(400).json({ error: 'No se proporcionó ninguna imagen' });
+      }
+    } catch (error) {
+      console.error('Error al subir la imagen:', error);
+      return res.status(500).json({ error: 'Error interno del servidor' });
+    }
+    }
+};

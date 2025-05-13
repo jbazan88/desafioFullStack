@@ -1,26 +1,26 @@
 [
   {
     "id": 1,
-    "name": "qwerty",
-    "surname": "qwerty",
-    "email": "admin@royal.com",
-    "password": "$2b$10$.4U/Btm2NqIGrZIj1L4MrODLOhaZJoLFihLsewVKzhmSpwkxnJ4/i",
-    "image": "",
-    "token": null,
-    "validated": true,
-    "lock": false,
-    "rolId": 1
+    "name" : "Administrador",
+		"surname" : "Royal",
+		"password" : "$2b$10$mqGLFdwFM4mW.S6.PaDRnOhXQY.IwG75TRouU9cCZBYlNbYQ/IQAG",
+		"email" : "admin@royal.com",
+		"image" : null,
+		"token" : "34fb5cd1-861a-4147-8a2d-0ed58e6703fc",
+		"validated" : 1,
+		"lock" : 0,
+		"rolId" : 1
   },
   {
     "id": 2,
-    "name": "molestie",
-    "surname": "hendrerit",
-    "email": "tlowles1@eepurl.com",
-    "password": "wF9!j*q9x",
-    "image": "",
-    "token": null,
-    "validated": true,
-    "lock": false,
+    "name": "User",
+    "surname": "qwerty",
+    "password": "$2b$10$qgQopFfmB8YwlCCedle/HuqTG4oiQfPDEraqjSA0UrdXkBrVSMsGa",
+    "email": "user@royal.com",
+    "image": null,
+    "token": "5e280888-adf8-4ded-ba07-e0f1e85e4485",
+    "validated": 1,
+    "lock": 0,
     "rolId": 2
   }
 ]

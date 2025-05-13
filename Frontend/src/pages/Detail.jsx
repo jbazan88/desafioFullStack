@@ -6,10 +6,9 @@ const Detail = () => {
   const [product, setProduct] = React.useState(null);
   const { id: productId } = useParams(); 
 
-  // Obtener producto desde la API
   React.useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/products/${productId}`) 
+      .get(`http://localhost:3000/products/${productId}`) 
       .then((response) => setProduct(response.data))
       .catch((error) => console.error("Error al obtener el producto:", error));
   }, [productId]);
@@ -26,7 +25,7 @@ const Detail = () => {
             <div className="card">
               <img
                 src={
-                  product.images?.length
+                  product.images && product.images.length > 0
                     ? `/images/products/${product.images[0].name}`
                     : "/images/default.jpg"
                 }

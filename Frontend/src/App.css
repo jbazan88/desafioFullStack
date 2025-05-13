@@ -1,0 +1,4 @@
+.carousel-row {
+      display: flex !important;
+    flex-wrap: wrap;
+}

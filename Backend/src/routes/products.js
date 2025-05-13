@@ -1,18 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const { list, detail, add, create, edit, update, remove, search, showCart} = require('../controllers/productController.js');
-const userSessionCheck = require('../middlewares/userSessionCheck.js');
-const upload = require('../middlewares/uploadMulter');
+const productController = require('../controllers/productController');
+const uploadController = require('../controllers/uploadController');
 
 router
-    .get('/', list)
-    .get('/detail/:id',detail)
-    .get('/add',add) //rendieriza el formulario
-    .post('/create',upload.single('image'),create) //recibe los datos del formulario
-    .get('/edit/:id',edit)
-    .put('/update/:id',upload.single('image'), update)
-    .delete('/remove/:id',remove)
-    .get('/search',search)
-    .get('/cart',userSessionCheck, showCart)
+.get('/', productController.list)
+.get('/:id', productController.detail)
+.post('/', productController.create)
+.put('/:id', productController.update)
+.delete('/:id', productController.remove)
+.post('/upload', uploadController.productUpload, productController.uploadImage)
+.post('/upload/:id', uploadController.productUpload, productController.uploadImage)
 
 module.exports = router;

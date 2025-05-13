@@ -7,8 +7,13 @@ import Home from './pages/Home'
 import Detail from './pages/Detail';
 import AboutUs from './pages/AboutUs';
 import AuthPage from './pages/AuthPage';
+import Profile from './pages/Profile';
 import ProductList from './pages/ProductList';
-import ProductEdit from './pages/ProductEdit';
+import Admin from './pages/Admin';
+import ProductEdit from './pages/AdminEdit';
+import CreateProduct from './pages/ProductAdd';
+import Cart from './pages/ProductCart';
+
 
 function App() {
 
@@ -21,17 +26,12 @@ function App() {
           <Route path="/products/:id" element={<Detail />} />
           <Route path="/aboutUs" element={<AboutUs />} />
           <Route path="/user" element={<AuthPage />} />
+          <Route path="/user/profile" element={<Profile />} />
           <Route path="/products" element={<ProductList />} />
-          <Route path="/products/:id/edit" element={<ProductEdit />} />
-          {/* <Route path="/products/cart" element={<Cart />} /> */}
-          {/* <Route path="/products/search" element={<SearchResults />} /> */}
-          {/* <Route path="/admin" element={<Admin />} /> */}
-          {/* <Route path="/admin/products" element={<AdminProducts />} /> */}
-          {/* <Route path="/admin/users" element={<AdminUsers />} /> */}
-          {/* <Route path="/admin/products/:id/edit" element={<EditProduct />} /> */}
-          {/* <Route path="/admin/products/create" element={<CreateProduct />} /> */}
-          {/* <Route path="/admin/users/:id/edit" element={<EditUser />} /> */}
-          {/* <Route path="/admin/users/create" element={<CreateUser />} /> */}
+          <Route path="/products/cart" element={<Cart />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/products/add" element={<CreateProduct />} />
+          <Route path="/products/edit/:id" element={<ProductEdit />} />
         </Routes>
       </main>
       <Footer />

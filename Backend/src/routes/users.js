@@ -1,16 +1,14 @@
-var express = require('express');
+const express = require('express');
 const router = express.Router();
-const userSessionCheck = require('../middlewares/userSessionCheck');
-const { register, login, processRegister, processLogin, profile, logout, update } = require('../controllers/userController.js');
-const { registerValidations} = require('../validations/userValidations');
+const userController = require('../controllers/userController');
+const { registerValidations, loginValidations } = require('../validations/userValidations');
+const authMiddleware = require('../middlewares/authApi');
 
 router
-.get('/register', register)
-.post('/processRegister', registerValidations, processRegister)
-.get('/login', login)
-.post('/processLogin', processLogin)
-.get('/logout',logout)
-.get('/profile', userSessionCheck, profile)
-.put('/update',update)
+.post('/processRegister', registerValidations, userController.processRegister)
+.post('/processLogin', loginValidations, userController.processLogin)
+.get('/profile', authMiddleware, userController.profile)
+.post('/logout', userController.logout)
+
 
 module.exports = router;
