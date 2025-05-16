@@ -230,7 +230,7 @@ const handleSubmit = async (e) => {
                     />
                     </div>
                     <button className="btn btn-primary" type="submit">
-                      Crear/editar producto
+                      Crear producto
                     </button>
                   </div>
                 </form>

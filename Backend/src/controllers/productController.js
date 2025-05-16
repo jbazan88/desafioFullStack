@@ -4,7 +4,15 @@ module.exports = {
   list: async (req, res) => {
     try {
       const products = await db.Product.findAll({
-        include: ['images'], // Relación con imágenes
+        include: [
+          'images',
+          { association: 'make' },
+          { association: 'model' },
+          { association: 'transmission' },
+          { association: 'category' },
+          { association: 'state' },
+          { association: 'origin' }
+        ],
       });
       return res.status(200).json(products);
     } catch (error) {
@@ -84,6 +92,14 @@ module.exports = {
         price,
       });
 
+      if (req.file) {
+        // Opcional: eliminar imagen anterior
+        await db.Image.create({
+          name: req.file.filename,
+          productId: product.id,
+        });
+      }
+
       return res.status(200).json(product);
     } catch (error) {
       console.error('Error al actualizar el producto:', error);
@@ -116,13 +132,10 @@ remove: async (req, res) => {
   }
 },
 
-  // Obtener datos para los dropdowns
-
 uploadImage: async (req, res) => {
     try {
       const productId = req.params.id;
 
-      // Verificar si el producto existe
       const product = await db.Product.findByPk(productId);
       if (!product) {
         return res.status(404).json({ error: 'Producto no encontrado' });

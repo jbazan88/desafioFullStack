@@ -7,7 +7,8 @@ router
 .get('/', productController.list)
 .get('/:id', productController.detail)
 .post('/', upload.single('image'), productController.create)
-.put('/:id', productController.update)
+.put('/:id/image', upload.single('image'), productController.uploadImage)
+.put('/:id', upload.single('image'), productController.update)
 .delete('/:id', productController.remove)
 
 module.exports = router;

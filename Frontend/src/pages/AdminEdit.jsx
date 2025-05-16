@@ -1,5 +1,5 @@
 import React from "react";
-import Menu from "../components/Menu";
+import MenuEdit from "../components/MenuEdit";
 
 const ProductEdit = () => {
 
@@ -10,7 +10,7 @@ const ProductEdit = () => {
           <h1>Editar producto</h1>
           <div className="col-12 col-md-8 mx-auto">
             <section className="card h-100 shadow bg-white">
-                    <Menu />
+                    <MenuEdit />
                     </section>
                     </div>
                     </div>
