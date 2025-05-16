@@ -92,20 +92,29 @@ module.exports = {
   },
 
   // Eliminar un producto
-  remove: async (req, res) => {
-    try {
-      const product = await db.Product.findByPk(req.params.id);
-      if (!product) {
-        return res.status(404).json({ error: 'Producto no encontrado' });
-      }
-
-      await product.destroy();
-      return res.status(204).send();
-    } catch (error) {
-      console.error('Error al eliminar el producto:', error);
-      return res.status(500).json({ error: 'Error al eliminar el producto' });
+remove: async (req, res) => {
+  try {
+    const product = await db.Product.findByPk(req.params.id, {
+      include: ['images'],
+    });
+    if (!product) {
+      return res.status(404).json({ error: 'Producto no encontrado' });
     }
-  },
+
+    // Elimina todas las imágenes asociadas primero
+    if (product.images && product.images.length > 0) {
+      for (const img of product.images) {
+        await img.destroy();
+      }
+    }
+
+    await product.destroy();
+    return res.status(204).send();
+  } catch (error) {
+    console.error('Error al eliminar el producto:', error);
+    return res.status(500).json({ error: 'Error al eliminar el producto' });
+  }
+},
 
   // Obtener datos para los dropdowns
 
