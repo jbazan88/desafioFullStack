@@ -1,15 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
-const uploadController = require('../controllers/uploadController');
+const upload = require('../middlewares/uploadMulter');
 
 router
 .get('/', productController.list)
 .get('/:id', productController.detail)
-.post('/', productController.create)
+.post('/', upload.single('image'), productController.create)
 .put('/:id', productController.update)
 .delete('/:id', productController.remove)
-.post('/upload', uploadController.productUpload, productController.uploadImage)
-.post('/upload/:id', uploadController.productUpload, productController.uploadImage)
 
 module.exports = router;

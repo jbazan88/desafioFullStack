@@ -7,15 +7,10 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 const cors = require('cors');
 
-/* const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const productsRouter = require('./routes/products');
-*/
 const apiProductsRouter = require('./routes/products');
 const apiUsersRouter = require('./routes/users');
 const apiDropdownsRouter = require('./routes/dropdowns');
-const apiCartRouter = require('./routes/cart'); // Asegúrate de que esta ruta sea correcta{
-
+const apiCartRouter = require('./routes/cart'); 
 
 const app = express();
 
@@ -29,12 +24,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(methodOverride('_method'));
 app.use(session({
-  secret: 'miSecreto', // Cambia esto por un secreto más seguro
+  secret: 'miSecreto', 
   resave: false,
-  saveUninitialized: false, // Cambiar a `false` para evitar sesiones vacías
+  saveUninitialized: false, 
   cookie: {
     httpOnly: true,
-    secure: false, // Cambiar a `true` si usas HTTPS
+    secure: false, //`true` si se usa HTTPS
     maxAge: 1000 * 60 * 60 * 24 // 1 día
   }
 }));
@@ -51,10 +46,6 @@ app.use((req, res, next) => {
   next()
 })
 
-/* app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/products', productsRouter);
-*/
 app.use('/products', apiProductsRouter);
 app.use('/users', apiUsersRouter);
 app.use('/cart', apiCartRouter);

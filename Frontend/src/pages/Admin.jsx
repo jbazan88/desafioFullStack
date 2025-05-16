@@ -49,17 +49,12 @@ const Admin = () => {
             {products.map((product) => (
               <div className="col-12 col-md-4 mb-4" key={product.id}>
                 <div className="card h-100 shadow">
-                  <img
-                    src={
-                      product.images && product.images.length
-                        ? product.images[0].name
-                        : '/images/default.jpg'
-                    }
-                    className="card-img-top"
-                    alt={`${product.make?.name || 'Marca desconocida'} ${
-                      product.model?.name || 'Modelo desconocido'
-                    }`}
-                  />
+                <img
+                  width="80%"
+                  className="card-img-top"
+                  src={`http://localhost:3000/uploads/products/${product.images?.[0]?.name || '/images/default.jpg'}`}
+                  alt={`Imagen de ${product.make?.name || 'Marca desconocida'} ${product.model?.name || 'Modelo desconocido'}`}
+                />
                   <div className="card-body">
                     <p className="product-year">Año: {product.year}</p>
                     <p className="product-brand">

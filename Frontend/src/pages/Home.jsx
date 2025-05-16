@@ -32,7 +32,7 @@ const Home = () => {
                     <img
   width="80%"
   className="card-img-top"
-  src={product.images?.length ? `/images/products/${product.images[0].name}` : '/images/default.jpg'}
+  src={`http://localhost:3000/uploads/products/${product.images?.[0]?.name || '/images/default.jpg'}`}
   alt={`Imagen de ${product.make?.name || 'Marca desconocida'} ${product.model?.name || 'Modelo desconocido'}`}
 />
                     </figure>

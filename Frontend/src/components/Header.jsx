@@ -2,14 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 function Header() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null); // No necesitas definir tipos en JavaScript
   const navigate = useNavigate();
 
   // Cargar el usuario desde localStorage al montar el componente
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch (error) {
+        console.error("Error parsing user from localStorage:", error);
+        localStorage.removeItem('user'); // Clear corrupted data
+        setUser(null);
+      }
     }
   }, []);
 
@@ -73,8 +79,8 @@ function Header() {
                 </div>
               </div>
               <Link className="nav-icon position-relative text-decoration-none" to="/admin">
-                      <i className="fa fa-fw fa-user-cog text-dark mr-3"></i>
-                    </Link>
+                <i className="fa fa-fw fa-user-cog text-dark mr-3"></i>
+              </Link>
               <Link className="nav-icon d-none d-lg-inline" to="#" data-bs-toggle="modal" data-bs-target="#nav_search">
                 <i className="fa fa-fw fa-search text-dark mr-2"></i>
               </Link>
@@ -97,15 +103,11 @@ function Header() {
                   <Link className="nav-icon position-relative text-decoration-none" to="/user/profile">
                     <i className="fa fa-fw fa-user text-dark mr-3"></i>
                   </Link>
-                   <Link className="nav-icon position-relative text-decoration-none" to="/users/logout">
-                <i className="fa fa-fw fa-sign-out-alt text-dark mr-3"></i>
-              </Link>
                 </>
               ) : (
                 <Link className="nav-icon position-relative text-decoration-none" to="/user">
                   <i className="fa fa-fw fa-user text-dark mr-3"></i>
                 </Link>
-                
               )}
             </div>
           </div>

@@ -2,3 +2,13 @@
       display: flex !important;
     flex-wrap: wrap;
 }
+
+.brand-img {
+  filter: grayscale(100%);
+  opacity: 0.5;
+  transition: .5s;
+}
+.brand-img:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+}

@@ -23,17 +23,12 @@ const Detail = () => {
           
           <div className="col-md-6">
             <div className="card">
-              <img
-                src={
-                  product.images && product.images.length > 0
-                    ? `/images/products/${product.images[0].name}`
-                    : "/images/default.jpg"
-                }
-                alt={`${product.make || "Marca desconocida"} ${
-                  product.model || "Modelo desconocido"
-                }`}
-                className="img-fluid"
-              />
+            <img
+  width="80%"
+  className="card-img-top"
+  src={`http://localhost:3000/uploads/products/${product.images?.[0]?.name || '/images/default.jpg'}`}
+  alt={`Imagen de ${product.make?.name || 'Marca desconocida'} ${product.model?.name || 'Modelo desconocido'}`}
+/>
             </div>
           </div>
 

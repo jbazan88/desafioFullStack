@@ -29,6 +29,7 @@ const DropdownMenu = ({ name, label, value, onChange, options, placeholder = `Se
 };
 
 const Menu = () => {
+  const [image, setImage] = useState(null);
   const [product, setProduct] = useState({
     make: "",
     model: "",
@@ -68,16 +69,28 @@ const Menu = () => {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post("http://localhost:3000/products", product);
-      alert("Producto creado con éxito");
-      navigate("/admin"); 
-    } catch (error) {
-      console.error("Error al crear el producto:", error);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const formData = new FormData();
+    Object.entries(product).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+    if (image) {
+      formData.append('image', image);
     }
-  };
+
+    await axios.post("http://localhost:3000/products", formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    alert("Producto creado con éxito");
+    navigate("/admin");
+  } catch (error) {
+    console.error("Error al crear el producto:", error);
+  }
+};
 
   return (
       <div className="card-body">
@@ -208,10 +221,16 @@ const Menu = () => {
                       <label className="btn btn-secondary" htmlFor="image">
                         Agregar imagen
                       </label>
-                      <input type="file" id="image" name="image" hidden />
+                      <input
+                      type="file"
+                      id="image"
+                      name="image"
+                      hidden
+                      onChange={e => setImage(e.target.files[0])}
+                    />
                     </div>
                     <button className="btn btn-primary" type="submit">
-                      Crear producto
+                      Crear/editar producto
                     </button>
                   </div>
                 </form>

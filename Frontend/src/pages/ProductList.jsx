@@ -29,27 +29,19 @@ const ProductList = () => {
                   className="text-decoration-none text-reset"
                 >
                   <figure className="product-box_image">
-                    <img
-                      width="80%"
-                      className="card-img-top"
-                      src={
-                        product.images?.length
-                          ? `/images/products/${product.images[0].name}`
-                          : "/images/default.jpg"
-                      }
-                      alt={`Imagen de ${product.make || "Marca desconocida"} ${
-                        product.model || "Modelo desconocido"
-                      }`}
-                    />
+                  <img
+                    width="80%"
+                    className="card-img-top"
+                    src={`http://localhost:3000/uploads/products/${product.images?.[0]?.name || '/images/default.jpg'}`}
+                    alt={`Imagen de ${product.make?.name || 'Marca desconocida'} ${product.model?.name || 'Modelo desconocido'}`}
+                  />
                   </figure>
                   <article className="position-relative ps-3">
-                    <p className="product-year">Año: {product.year}</p>
-                    <p className="product-brand">
-                      <b>
-                        {product.make || "Marca desconocida"}{" "}
-                        {product.model || "Modelo desconocido"}
-                      </b>
+                  <p className="product-brand">
+                    {product.make?.name || "Marca desconocida"}{" "}
+                    {product.model?.name || "Modelo desconocido"}
                     </p>
+                    <p className="product-year">Año: {product.year}</p>
                     <p className="product-price">
                       u$d {toThousand(product.price)}
                     </p>
@@ -60,10 +52,7 @@ const ProductList = () => {
           ))}
         </div>
       </div>
-      <div className="container d-flex justify-content-end">
-        <a href="/admin">Volver a la lista</a>
-      </div>
-    </main>
+      </main>
   );
 };
 
