@@ -25,19 +25,14 @@ const Footer = () => {
           </div>
 
           <div className="col-md-4 pt-5">
-            <h2 className="h2 text-dark border-bottom pb-3 border-light">Vehículos</h2>
-            <ul className="list-unstyled text-dark footer-link-list">
-              <li><a className="text-decoration-none" href="#">Autos</a></li>
-              <li><a className="text-decoration-none" href="#">SUVs</a></li>
-              <li><a className="text-decoration-none" href="#">Pick Ups</a></li>
-            </ul>
+<h2 className="h2 text-white border-bottom pb-3 border-light"> PROXIMAMENTE</h2>
           </div>
 
           <div className="col-md-4 pt-5">
             <h2 className="h2 text-dark border-bottom pb-3 border-light">Ayuda</h2>
             <ul className="list-unstyled text-dark footer-link-list">
               <li><a className="text-decoration-none" href="/">Inicio</a></li>
-              <li><a className="text-decoration-none" href="#">Postventa</a></li>
+              <li><a className="text-decoration-none" href="/user">Login</a></li>
               <li><a className="text-decoration-none" href="aboutUs">Sobre Nosotros</a></li>
             </ul>
           </div>
